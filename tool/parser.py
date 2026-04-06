@@ -5,11 +5,11 @@ def normalize_location(name):
         return ""
     name = name.replace("-", " ")
     if name.startswith("Xa"):
-        return "xã " + name[2:]
+        return "Xã " + name[2:]
     elif name.startswith("Phuong"):
-        return "phường " + name[6:]
+        return "Phường " + name[6:]
     elif name.startswith("Tinh"):
-        return "tỉnh " + name[4:]
+        return "Tỉnh " + name[4:]
     return name
 
 def parse_filename(filename):

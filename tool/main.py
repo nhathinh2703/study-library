@@ -105,9 +105,11 @@ def process_file(file, category, force_update=False):
 
     # 6. Sinh caption
     print("6) Đang tạo caption...")
-    title, page, profile = generate_caption(data,
-                                            drive_link=pdf_download,
-                                            web_link=pdf_link)
+    # Sau khi có docx_link, pdf_link, pdf_download
+    data["docx_link"] = docx_link
+    data["drive_link"] = pdf_link
+    data["pdf_download"] = pdf_download
+    title, page, profile = generate_caption(data, web_link=config.GITHUB_PAGE_URL)
     with open(os.path.join(out_dir, "caption_page.txt"), "w", encoding="utf-8") as f:
         f.write(page)
     with open(os.path.join(out_dir, "caption_profile.txt"), "w", encoding="utf-8") as f:

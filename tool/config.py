@@ -25,4 +25,4 @@ DRIVE_ARTICLES_ID = "..."       # ID folder articles
 # Cờ điều khiển
 FORCE_UPDATE = False
 
-GITHUB_PAGE_URL = ""
+GITHUB_PAGE_URL = "https://nhathinh2703.github.io/study-library/"

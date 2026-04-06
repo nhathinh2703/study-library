@@ -1,6 +1,6 @@
 from config import GITHUB_PAGE_URL
 
-def generate_caption(data, drive_link="", web_link=GITHUB_PAGE_URL):
+def generate_caption(data, web_link=GITHUB_PAGE_URL):
     # mapping subject
     subject_map = {
         "TinHoc": "Tin học",
@@ -35,10 +35,10 @@ def generate_caption(data, drive_link="", web_link=GITHUB_PAGE_URL):
 📍 {data['province']}{' - ' + data['commune'] if data.get('commune') else ''} | 🎯 {data['year']}
 
 📥 Tải PDF:
-👉 {drive_link}
+👉 {data.get("pdf_download")}
 
 📖 Xem PDF trực tuyến:
-👉 {drive_link}
+👉 {data.get("drive_link")}
 
 🌐 Trang web tổng hợp đầy đủ các đề:
 👉 {web_link}
@@ -49,10 +49,13 @@ def generate_caption(data, drive_link="", web_link=GITHUB_PAGE_URL):
     # caption cho profile
     profile = f"""Mình vừa tổng hợp đề này 👇
 
-💻 {title}
+💻 {title.upper()}
 
 📥 Tải PDF:
-👉 {drive_link}
+👉 {data.get("drive_link")}
+
+📖 Xem PDF trực tuyến:
+👉 {data.get("drive_link")}
 
 🌐 Trang web tổng hợp đầy đủ các đề:
 👉 {web_link}
