@@ -1,197 +1,245 @@
+:root {
+  --color-primary: #6a0dad;       /* tím chủ đạo */
+  --color-primary-dark: #530a9e;  /* tím đậm hơn */
+  --color-secondary: #fff;        /* nền trắng */
+  --color-text: #333;
+  --color-muted: #777;
+  --color-border: #ddd;
+  --color-danger: #ff0000;        /* đỏ cho badge */
+  --color-background-light: #f1f1f1; /* nền xám nhạt */
+}
+
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #fff;
-    color: #333;
-}
-
-header,
-footer {
-    background-color: #6a0dad;
-    color: #fff;
-    padding: 10px 20px;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    text-align: center;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
 }
 
 header {
-    top: 0;
-}
-
-footer {
-    bottom: 0;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 nav a {
-    color: #fff;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: 600;
+  color: var(--color-secondary);
+  margin: 0 20px;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  padding: 5px 0;
 }
 
-nav a:hover {
-    text-decoration: underline;
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-secondary);
+  transition: width 0.3s ease;
 }
 
-main {
-    padding: 80px 20px 100px;
-    /* chừa khoảng trống cho header/footer */
-    ;
-    max-width: 1200px;
-    margin: auto;
+nav a:hover::after {
+  width: 100%;
+}
+
+footer {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  padding: 10px 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+footer p {
+  margin: 0;
+  font-weight: 400;
+}
+
+.social-links {
+  margin-top: 5px;
 }
 
 .social-links a {
-    margin: 0 10px;
-    color: #fff;
+  margin: 0 10px;
+  color: var(--color-secondary);
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--color-primary-dark);
+}
+
+main {
+  padding: 80px 20px 100px; /* chừa khoảng trống cho header/footer */
+  max-width: 1200px;
+  margin: auto;
 }
 
 .card-container {
-    display: flex;
-    /* bật flexbox */
-    flex-wrap: wrap;
-    /* cho phép xuống dòng khi hết chỗ */
-    gap: 20px;
-    /* khoảng cách giữa các card */
-    justify-content: center;
-    /* căn giữa các card */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .card {
-    flex: 0 0 200px;
-    /* mỗi card rộng 250px, không chiếm hết dòng */
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+  flex: 0 0 200px;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+  transform: none;
+  box-shadow: 0 0 15px rgba(106, 13, 173, 0.4);
+  border-color: var(--color-primary);
 }
 
 .card h3 {
-    color: #6a0dad;
-    /* tím */
-    margin: 10px 4px;
+  color: var(--color-primary);
+  margin: 10px 4px;
 }
 
 .card-actions {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .btn {
-    padding: 5px 12px;
-    border-radius: 4px;
-    text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.btn.view {
-    background-color: #6a0dad;
-    color: #fff;
+.btn.primary {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-primary);
 }
 
-.btn.download {
-    background-color: #fff;
-    color: #6a0dad;
-    border: 1px solid #6a0dad;
+.btn.primary:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: 0 0 10px rgba(106, 13, 173, 0.4);
+  transform: scale(1.03);
 }
 
-.btn:hover {
-    opacity: 0.9;
+.btn.secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn.secondary:hover {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  box-shadow: 0 0 10px rgba(106, 13, 173, 0.4);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .subtitle {
-    font-size: 0.95rem;
-    color: #777;
-    /* màu nhạt hơn */
-    margin-bottom: 20px;
-    text-align: justify;
-    /* căn giữa cho đẹp */
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin-bottom: 20px;
+  text-align: justify;
 }
 
 .badge.new {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ff0000;
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 4px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--color-danger);
+  color: var(--color-secondary);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 .info-row {
-    display: flex;
-    justify-content: space-between;
-    /* cách đều 2 bên */
-    margin: 5px;
-    font-size: 0.9rem;
-    color: #555;
-    /* màu nhạt hơn */
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
 }
 
 .card.book {
-    flex: 0 0 220px;
-    text-align: center;
+  flex: 0 0 220px;
+  text-align: center;
 }
 
 .book-cover {
-    width: 100%;
-    height: 250px;
-    background-size: contain; /* hoặc cover */
-    background-repeat: no-repeat;
-    background-position: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* bóng đổ nhẹ */
-    border-radius: 4px; /* bo góc nhẹ cho mềm mại */
+  width: 100%;
+  height: 250px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border-radius: 4px;
 }
 
-
 .pagination {
-    display: flex;
-    justify-content: center;
-    /* căn giữa */
-    align-items: center;
-    gap: 10px;
-    /* khoảng cách giữa các nút */
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .pagination button {
-    background-color: #6a0dad;
-    /* tím chủ đạo */
-    color: #fff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 600;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .pagination button:hover {
-    background-color: #530a9e;
-    /* tím đậm hơn khi hover */
+  background-color: var(--color-primary-dark);
 }
 
 .pagination span {
-    font-size: 0.95rem;
-    color: #555;
-    /* màu nhạt hơn */
+  font-size: 0.95rem;
+  color: var(--color-muted);
 }
 
 .accordion {
-  background-color: #f1f1f1;
+  background-color: var(--color-background-light);
   cursor: pointer;
   padding: 10px;
   width: 100%;
@@ -206,11 +254,11 @@ main {
 .panel {
   display: none;
   padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-border);
 }
 
 .date {
   font-size: 0.85rem;
-  color: #777;
+  color: var(--color-muted);
 }

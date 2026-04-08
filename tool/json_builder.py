@@ -64,8 +64,8 @@ def save_json_book(data, out_dir):
             <span>📅 {info.get('update_date','')}</span>
         </div>
         <div class="card-actions">
-            <a href="{info['drive_view']}" class="btn view" target="_blank">Xem</a>
-            <a href="{info['drive_download']}" class="btn download">Tải</a>
+            <a href="{info['drive_view']}" class="btn primary" target="_blank">Xem</a>
+            <a href="{info['drive_download']}" class="btn secondary">Tải</a>
         </div>
     </div>
     """
