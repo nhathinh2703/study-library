@@ -1,0 +1,216 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+header,
+footer {
+    background-color: #6a0dad;
+    color: #fff;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 80px 20px 100px;
+    /* chừa khoảng trống cho header/footer */
+    ;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.social-links a {
+    margin: 0 10px;
+    color: #fff;
+}
+
+.card-container {
+    display: flex;
+    /* bật flexbox */
+    flex-wrap: wrap;
+    /* cho phép xuống dòng khi hết chỗ */
+    gap: 20px;
+    /* khoảng cách giữa các card */
+    justify-content: center;
+    /* căn giữa các card */
+}
+
+.card {
+    flex: 0 0 200px;
+    /* mỗi card rộng 250px, không chiếm hết dòng */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: #6a0dad;
+    /* tím */
+    margin: 10px 4px;
+}
+
+.card-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.btn.view {
+    background-color: #6a0dad;
+    color: #fff;
+}
+
+.btn.download {
+    background-color: #fff;
+    color: #6a0dad;
+    border: 1px solid #6a0dad;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #777;
+    /* màu nhạt hơn */
+    margin-bottom: 20px;
+    text-align: justify;
+    /* căn giữa cho đẹp */
+}
+
+.badge.new {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff0000;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    /* cách đều 2 bên */
+    margin: 5px;
+    font-size: 0.9rem;
+    color: #555;
+    /* màu nhạt hơn */
+}
+
+.card.book {
+    flex: 0 0 220px;
+    text-align: center;
+}
+
+.book-cover {
+    width: 100%;
+    height: 250px;
+    background-size: contain; /* hoặc cover */
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* bóng đổ nhẹ */
+    border-radius: 4px; /* bo góc nhẹ cho mềm mại */
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    /* căn giữa */
+    align-items: center;
+    gap: 10px;
+    /* khoảng cách giữa các nút */
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #6a0dad;
+    /* tím chủ đạo */
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.pagination button:hover {
+    background-color: #530a9e;
+    /* tím đậm hơn khi hover */
+}
+
+.pagination span {
+    font-size: 0.95rem;
+    color: #555;
+    /* màu nhạt hơn */
+}
+
+.accordion {
+  background-color: #f1f1f1;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel {
+  display: none;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.date {
+  font-size: 0.85rem;
+  color: #777;
+}

@@ -1,0 +1,91 @@
+<section id="books">
+    <h2>Học liệu</h2>
+    <p class="subtitle">Kho sách và tài liệu tham khảo cho học sinh</p>
+    <div class="card-container">
+
+    <div class="card book">
+        <span class="badge new">NEW</span>
+        <img src="images\cover_Giai-thuat-va-lap-trinh.jpg" alt="Bìa sách" class="book-cover">
+        <h3>Giải thuật và lập trình</h3>
+        <div class="info-row">
+            <span>📖 Thuật toán</span>
+            <span>📄 315 trang</span>
+        </div>
+        <div class="info-row">
+            <span>✍️ Lê Minh Hoàng</span>
+        </div>
+        <div class="info-row">
+            <span>📅 2026-04-08 12:44:30</span>
+        </div>
+        <div class="card-actions">
+            <a href="https://drive.google.com/file/d/100WUagwByphSv6YSxMqVK-On6rNyzv8E/view?usp=sharing" class="btn view" target="_blank">Xem</a>
+            <a href="https://drive.google.com/uc?export=download&id=100WUagwByphSv6YSxMqVK-On6rNyzv8E" class="btn download">Tải</a>
+        </div>
+    </div>
+    
+    <div class="card book">
+        <span class="badge new">NEW</span>
+        <img src="images\cover_Tai-lieu-giao-khoa-chuyen-Tin-Quyen-1.jpg" alt="Bìa sách" class="book-cover">
+        <h3>Tài liệu giáo khoa chuyên Tin (Quyển 1)</h3>
+        <div class="info-row">
+            <span>📖 Thuật toán</span>
+            <span>📄 219 trang</span>
+        </div>
+        <div class="info-row">
+            <span>✍️ Hồ Sĩ Đàm (Chủ biên)</span>
+        </div>
+        <div class="info-row">
+            <span>📅 2026-04-08 12:44:40</span>
+        </div>
+        <div class="card-actions">
+            <a href="https://drive.google.com/file/d/1NncAZP5kFRlswTIvYlJljyBhHKeoEERX/view?usp=sharing" class="btn view" target="_blank">Xem</a>
+            <a href="https://drive.google.com/uc?export=download&id=1NncAZP5kFRlswTIvYlJljyBhHKeoEERX" class="btn download">Tải</a>
+        </div>
+    </div>
+    
+    <div class="card book">
+        <span class="badge new">NEW</span>
+        <img src="images\cover_Tai-lieu-giao-khoa-chuyen-Tin-Quyen-2.jpg" alt="Bìa sách" class="book-cover">
+        <h3>Tài liệu giáo khoa chuyên Tin (Quyển 2)</h3>
+        <div class="info-row">
+            <span>📖 Thuật toán</span>
+            <span>📄 240 trang</span>
+        </div>
+        <div class="info-row">
+            <span>✍️ Hồ Sĩ Đàm (Chủ biên)</span>
+        </div>
+        <div class="info-row">
+            <span>📅 2026-04-08 12:44:50</span>
+        </div>
+        <div class="card-actions">
+            <a href="https://drive.google.com/file/d/1Z5L8O4tKfkDDyLVd19tzRT2iWeB1hpUF/view?usp=sharing" class="btn view" target="_blank">Xem</a>
+            <a href="https://drive.google.com/uc?export=download&id=1Z5L8O4tKfkDDyLVd19tzRT2iWeB1hpUF" class="btn download">Tải</a>
+        </div>
+    </div>
+    
+    <div class="card book">
+        <span class="badge new">NEW</span>
+        <img src="images\cover_Tai-lieu-giao-khoa-chuyen-Tin-Quyen-3.jpg" alt="Bìa sách" class="book-cover">
+        <h3>Tài liệu giáo khoa chuyên Tin (Quyển 3)</h3>
+        <div class="info-row">
+            <span>📖 Thuật toán</span>
+            <span>📄 172 trang</span>
+        </div>
+        <div class="info-row">
+            <span>✍️ Hồ Sĩ Đàm (Chủ biên)</span>
+        </div>
+        <div class="info-row">
+            <span>📅 2026-04-08 12:46:11</span>
+        </div>
+        <div class="card-actions">
+            <a href="https://drive.google.com/file/d/1htCQVGmLsPtW1-PHITo4Nz__TX_cgdqS/view?usp=sharing" class="btn view" target="_blank">Xem</a>
+            <a href="https://drive.google.com/uc?export=download&id=1htCQVGmLsPtW1-PHITo4Nz__TX_cgdqS" class="btn download">Tải</a>
+        </div>
+    </div>
+        </div>
+    <div class="pagination">
+        <button>« Trước</button>
+        <span>Trang 1/1</span>
+        <button>Sau »</button>
+    </div>
+</section>

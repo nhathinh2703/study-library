@@ -1,5 +1,19 @@
 import os
+from datetime import datetime
+import unicodedata
+import re
 
+def normalize_filename(text):
+    # bỏ dấu tiếng Việt
+    text = unicodedata.normalize('NFD', text)
+    text = text.encode('ascii', 'ignore').decode('utf-8')
+    # thay khoảng trắng bằng gạch nối
+    text = re.sub(r'\s+', '-', text)
+    # bỏ ký tự đặc biệt
+    text = re.sub(r'[^A-Za-z0-9\-]', '', text)
+    return text
+
+# --- normalize location (cho đề thi) ---
 def normalize_location(name):
     if not name:
         return ""
@@ -12,21 +26,18 @@ def normalize_location(name):
         return "Tỉnh " + name[4:]
     return name
 
-def parse_filename(filename):
-    # bỏ phần mở rộng .docx
+# --- parse cho đề thi ---
+def parse_exam_filename(filename):
     name, _ = os.path.splitext(filename)
-
-    # tách theo dấu "_"
     parts = name.split("_")
 
-    subject_raw = parts[0]       # TinHoc
-    exam_type_raw = parts[1]     # HSG, THT, ChuyenTin10...
-    level = parts[2]             # THCS, THPT...
+    subject_raw = parts[0]
+    exam_type_raw = parts[1]
+    level = parts[2]
     commune = None
     province = None
     year = None
 
-    # nếu có 5 phần trở lên thì có commune
     if len(parts) == 5:
         province = parts[3]
         year = parts[4]
@@ -35,7 +46,6 @@ def parse_filename(filename):
         province = parts[4]
         year = parts[5]
 
-    # mapping subject
     subject_map = {
         "TinHoc": "Tin học",
         "Toan": "Toán",
@@ -49,7 +59,6 @@ def parse_filename(filename):
     }
     subject = subject_map.get(subject_raw, subject_raw)
 
-    # mapping type
     type_map = {
         "HSG": "Học sinh giỏi",
         "THT": "Tin học trẻ",
@@ -57,7 +66,6 @@ def parse_filename(filename):
     }
     exam_type = type_map.get(exam_type_raw, exam_type_raw)
 
-    # chuẩn hóa location
     commune = normalize_location(commune) if commune else ""
     province = normalize_location(province) if province else ""
     year = year.replace("-", "–") if year else ""
@@ -70,4 +78,32 @@ def parse_filename(filename):
         "commune": commune,
         "province": province,
         "year": year
+    }
+
+def parse_book_filename(filename):
+    """
+    Format: Title_Author_Category_Pages.pdf
+    """
+    name, _ = os.path.splitext(filename)
+    parts = name.split("_")
+
+    if len(parts) < 4:
+        raise ValueError("Tên file không đúng format: Title_Author_Category_Pages.pdf")
+
+    # giữ nguyên tiếng Việt để hiển thị
+    title_vi = parts[0].replace("-", " ")
+    author = parts[1].replace("-", " ")
+    category = parts[2].replace("-", " ")  # lấy trực tiếp tiếng Việt
+    pages = parts[3]
+
+    # tạo thêm tên ASCII để dùng cho file/thư mục
+    title_ascii = normalize_filename(title_vi)
+
+    return {
+        "id": title_ascii,      # dùng ASCII làm id an toàn
+        "title": title_vi,      # hiển thị tiếng Việt
+        "title_ascii": title_ascii,
+        "author": author,
+        "category": category,   # tiếng Việt luôn
+        "pages": pages
     }

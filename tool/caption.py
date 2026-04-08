@@ -1,6 +1,6 @@
 from config import GITHUB_PAGE_URL
 
-def generate_caption(data, web_link=GITHUB_PAGE_URL):
+def generate_exam_caption(data, web_link=GITHUB_PAGE_URL):
     # mapping subject
     subject_map = {
         "TinHoc": "Tin học",
@@ -64,3 +64,46 @@ def generate_caption(data, web_link=GITHUB_PAGE_URL):
 """
 
     return title, page, profile
+
+def generate_book_caption(data, web_link=GITHUB_PAGE_URL):
+    title = data.get("title", "")
+    author = data.get("author", "")
+    pages = data.get("pages", "")
+    drive_upload = data.get("drive_upload", "")
+    drive_download = data.get("drive_download", "")
+    drive_view = data.get("drive_view", "")
+
+    # caption cho page
+    caption_page = f"""📚 SÁCH: {title.upper()}
+
+✍️ Tác giả: {author}
+📖 Số trang: {pages}
+
+📥 Tải PDF:
+👉 {drive_upload}
+
+📖 Xem PDF trực tuyến:
+👉 {drive_view}
+
+🌐 Thư viện tổng hợp:
+👉 {web_link}
+
+✨ Chúc bạn đọc sách hiệu quả và bổ ích! ✨
+"""
+
+    # caption cho profile
+    caption_profile = f"""Mình vừa thêm sách mới 👇
+
+📚 {title} - {author} ({pages} trang)
+
+📥 Tải bản gốc:
+👉 {drive_upload}
+
+📖 Xem bản có watermark:
+👉 {drive_view}
+
+🌐 Trang web tổng hợp đầy đủ các sách:
+👉 {web_link}
+"""
+
+    return title, caption_page, caption_profile
