@@ -4,13 +4,12 @@ import config
 
 def save_json_exam(data, out_dir):
     info = {
-        "subject": data["subject"],
-        "type": data["type"],
-        "level": data["level"],
-        "commune": data.get("commune"),
-        "province": data["province"],
-        "year": data["year"],
-        "images": data.get("images", []),   # danh sách ảnh nằm trong data
+        "subject": data.get("subject"),
+        "type": data.get("type"),
+        "level": data.get("level"),
+        "unit": data.get("unit"),
+        "year": data.get("year"),
+        "images": data.get("images", []),
         "drive_upload": data.get("drive_upload"),
         "drive_download": data.get("drive_download"),
         "drive_view": data.get("drive_view"),
@@ -24,6 +23,33 @@ def save_json_exam(data, out_dir):
     json_path = os.path.join(out_dir, "info.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(info, f, ensure_ascii=False, indent=2)
+
+    # Sinh card HTML cho exam
+    card_html = f"""
+    <div class="card">
+        <span class="badge new">NEW</span>
+        <h3>Đề thi {info['type']} cấp {info['level']} {info['unit']} năm {info['year']}</h3>
+        <div class="info-row">
+            <span>🏆 {info['type']}</span>
+            <span>📘 {info['subject']}</span>
+        </div>
+        <div class="info-row">
+            <span>🎓 {info['level']}</span>
+            <span>📅 {info['year']}</span>
+        </div>
+        <div class="info-row">
+            <span>🌍 {info['unit']}</span>
+        </div>
+        <div class="card-actions">
+            <a href="{info['drive_view']}" class="btn primary" target="_blank">Xem</a>
+            <a href="{info['drive_download']}" class="btn secondary">Tải</a>
+        </div>
+    </div>
+    """
+
+    section_path = os.path.join(config.EXAMS_OUTPUT_DIR, "section_exams.txt")
+    with open(section_path, "a", encoding="utf-8") as f:
+        f.write(card_html)
 
 def save_json_book(data, out_dir):
     info = {

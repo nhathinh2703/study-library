@@ -1,50 +1,61 @@
 import os
-from datetime import datetime
 import unicodedata
 import re
 
 def normalize_filename(text):
+    # thay riêng các ký tự đặc biệt trước khi bỏ dấu
+    text = text.replace("Đ", "D").replace("đ", "d")
+
     # bỏ dấu tiếng Việt
     text = unicodedata.normalize('NFD', text)
     text = text.encode('ascii', 'ignore').decode('utf-8')
+
     # thay khoảng trắng bằng gạch nối
     text = re.sub(r'\s+', '-', text)
+
     # bỏ ký tự đặc biệt
     text = re.sub(r'[^A-Za-z0-9\-]', '', text)
-    return text
 
-# --- normalize location (cho đề thi) ---
-def normalize_location(name):
-    if not name:
+    return text
+import re
+
+def normalize_location(unit: str) -> str:
+    if not unit:
         return ""
-    name = name.replace("-", " ")
-    if name.startswith("Xa"):
-        return "Xã " + name[2:]
-    elif name.startswith("Phuong"):
-        return "Phường " + name[6:]
-    elif name.startswith("Tinh"):
-        return "Tỉnh " + name[4:]
-    return name
+
+    # Tách theo dấu gạch nối
+    parts = unit.split("-")
+    if len(parts) < 2:
+        return unit
+
+    prefix = parts[0]
+    rest = " ".join(parts[1:])
+
+    prefix_map = {
+        "Tinh": "Tỉnh",
+        "ThanhPho": "Thành phố",
+        "Truong": "Trường",
+        "So": "Sở",
+        "Xa": "Xã",
+        "Phuong": "Phường",
+        "ThiXa": "Thị xã",
+        "Huyen": "Huyện",
+    }
+
+    prefix_vn = prefix_map.get(prefix, prefix)
+    return f"{prefix_vn} {rest}"
 
 # --- parse cho đề thi ---
 def parse_exam_filename(filename):
     name, _ = os.path.splitext(filename)
     parts = name.split("_")
 
+    # mẫu: subject_type_level_unit_year
     subject_raw = parts[0]
-    exam_type_raw = parts[1]
+    exam_type = parts[1]  # lấy trực tiếp, không map
     level = parts[2]
-    commune = None
-    province = None
-    year = None
-
-    if len(parts) == 5:
-        province = parts[3]
-        year = parts[4]
-    elif len(parts) == 6:
-        commune = parts[3]
-        province = parts[4]
-        year = parts[5]
+    unit = normalize_location(parts[3])       # có thể là tỉnh, trường, sở...
+    year = parts[4] if len(parts) > 4 else ""
 
     subject_map = {
         "TinHoc": "Tin học",
@@ -58,25 +69,12 @@ def parse_exam_filename(filename):
         "DiaLy": "Địa lý",
     }
     subject = subject_map.get(subject_raw, subject_raw)
-
-    type_map = {
-        "HSG": "Học sinh giỏi",
-        "THT": "Tin học trẻ",
-        "ChuyenTin10": "Thi vào chuyên Tin lớp 10",
-    }
-    exam_type = type_map.get(exam_type_raw, exam_type_raw)
-
-    commune = normalize_location(commune) if commune else ""
-    province = normalize_location(province) if province else ""
-    year = year.replace("-", "–") if year else ""
-
     return {
         "id": name,
         "subject": subject,
         "type": exam_type,
         "level": level,
-        "commune": commune,
-        "province": province,
+        "unit": unit,
         "year": year
     }
 

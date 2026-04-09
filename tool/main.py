@@ -8,21 +8,46 @@ from caption import generate_exam_caption, generate_book_caption
 from json_builder import save_json_exam, save_json_book
 from drive_uploader import upload_file, update_file
 from pdf_utils import add_pdf_watermark, extract_cover, add_pdf_watermark_first_page
+from generate_html import generate_html, generate_index_html
 
 processed_count = 0
 
 def init_section_books():
     section_path = os.path.join(config.BOOKS_OUTPUT_DIR, "section_books.txt")
     with open(section_path, "w", encoding="utf-8") as f:
-        f.write("""<section id="books">
-    <h2>Học liệu</h2>
-    <p class="subtitle">Kho sách và tài liệu tham khảo cho học sinh</p>
-    <div class="card-container">
-""")
+        f.write("""        <section class="hero">
+            <h1>Học liệu</h1>
+            <p class="subtitle">Kho sách và tài liệu tham khảo cho học sinh.</p>
+        </section>
+        <section id="books">
+            <div class="card-container">""")
     return section_path
 
 def finalize_section_books():
     section_path = os.path.join(config.BOOKS_OUTPUT_DIR, "section_books.txt")
+    with open(section_path, "a", encoding="utf-8") as f:
+        f.write("""    </div>
+    <div class="pagination">
+        <button>« Trước</button>
+        <span>Trang 1/1</span>
+        <button>Sau »</button>
+    </div>
+</section>
+""")
+
+def init_section_exams():
+    section_path = os.path.join(config.EXAMS_OUTPUT_DIR, "section_exams.txt")
+    with open(section_path, "w", encoding="utf-8") as f:
+        f.write("""        <section class="hero">
+            <h1>Đề thi</h1>
+            <p class="subtitle">Kho đề thi Tin học các kỳ, nhiều năm học và tỉnh thành để tham khảo và luyện tập.</p>
+        </section>
+        <section id="exams">
+            <div class="card-container">""")
+    return section_path
+
+def finalize_section_exams():
+    section_path = os.path.join(config.EXAMS_OUTPUT_DIR, "section_exams.txt")
     with open(section_path, "a", encoding="utf-8") as f:
         f.write("""    </div>
     <div class="pagination">
@@ -157,7 +182,7 @@ def process_books(file, force_update=False):
     print("→ Bước 3: Tạo ảnh bìa từ PDF...")
     cover_name = f"cover_{data['id']}.jpg"
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    cover_dir = os.path.join(repo_root, "docs", "images")
+    cover_dir = os.path.join(repo_root, "docs", "assets", "images")
     os.makedirs(cover_dir, exist_ok=True)
     cover_path = os.path.join(cover_dir, cover_name)
     extract_cover(pdf_path, cover_path)
@@ -214,6 +239,9 @@ def main():
     global processed_count
     processed_count = 0
 
+    # khởi tạo section_exams.txt mới
+    init_section_exams()
+
     # khởi tạo section_books.txt mới
     init_section_books()
 
@@ -229,11 +257,24 @@ def main():
     for file in book_files:
         process_books(file, force_update=config.FORCE_UPDATE)
 
+    # đóng section_exams.txt
+    finalize_section_exams()
+
     # đóng section_books.txt
     finalize_section_books()
 
-    print("\n=== Hoàn tất tất cả ===")
+    print("\n=== Hoàn tất xử lý dữ liệu ===")
     print(f"Tổng số file đã xử lý: {processed_count}")
+
+    # hỏi người dùng có muốn sinh HTML không
+    choice = input("\nBạn có muốn sinh các trang HTML (index, exam, book)? [y/n]: ").strip().lower()
+    if choice == "y":
+        generate_index_html()
+        generate_html("exam.html", "Thư viện học tập - Đề thi", section_file=config.SECTION_EXAM_FILE)
+        generate_html("book.html", "Thư viện học tập - Học liệu", section_file=config.SECTION_BOOK_FILE)
+        print("\n=== Đã sinh các trang HTML trong thư mục docs ===")
+    else:
+        print("Bỏ qua bước sinh HTML.")
 
 if __name__ == "__main__":
     main()

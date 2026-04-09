@@ -1,0 +1,32 @@
+        <section class="hero">
+            <h1>Đề thi</h1>
+            <p class="subtitle">Kho đề thi Tin học các kỳ, nhiều năm học và tỉnh thành để tham khảo và luyện tập.</p>
+        </section>
+        <section id="exams">
+            <div class="card-container">
+    <div class="card">
+        <span class="badge new">NEW</span>
+        <h3>Đề thi HSG cấp THCS Tỉnh Gia Lai năm 2025-2026</h3>
+        <div class="info-row">
+            <span>🏆 HSG</span>
+            <span>📘 Tin học</span>
+        </div>
+        <div class="info-row">
+            <span>🎓 THCS</span>
+            <span>📅 2025-2026</span>
+        </div>
+        <div class="info-row">
+            <span>🌍 Tỉnh Gia Lai</span>
+        </div>
+        <div class="card-actions">
+            <a href="https://drive.google.com/file/d/1Tf5mcO7jrgDP3PMhm-rdskVcmhKl2vYk/view?usp=sharing" class="btn primary" target="_blank">Xem</a>
+            <a href="https://drive.google.com/uc?export=download&id=1Tf5mcO7jrgDP3PMhm-rdskVcmhKl2vYk" class="btn secondary">Tải</a>
+        </div>
+    </div>
+        </div>
+    <div class="pagination">
+        <button>« Trước</button>
+        <span>Trang 1/1</span>
+        <button>Sau »</button>
+    </div>
+</section>

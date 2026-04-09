@@ -15,30 +15,25 @@ def generate_exam_caption(data, web_link=GITHUB_PAGE_URL):
     }
     subject = subject_map.get(data.get("subject"), data.get("subject"))
 
-    # mapping type
-    type_map = {
-        "HSG": "Học sinh giỏi",
-        "THT": "Tin học trẻ",
-        "ChuyenTin10": "Thi vào chuyên Tin lớp 10",
-    }
-    exam_type = type_map.get(data.get("type"), data.get("type"))
+    # exam_type lấy trực tiếp
+    exam_type = data.get("type", "")
 
-    # title: nếu có xã/phường thì thêm vào, nếu không thì chỉ tỉnh
-    if data.get("commune"):
-        title = f"Đề {exam_type} {subject} {data['level']} {data['commune']}, {data['province']} {data['year']}"
-    else:
-        title = f"Đề {exam_type} {subject} {data['level']} {data['province']} {data['year']}"
+    # title: chỉ còn unit (tỉnh, trường, sở...)
+    title = f"ĐỀ THI {exam_type} MÔN {subject} CẤP {data['level']}, {data['unit']}, năm {data['year']}"
+
+    drive_download = data.get("drive_download", "")
+    drive_view = data.get("drive_view", "")
 
     # caption cho page
-    page = f"""💻 ĐỀ THI {exam_type.upper()} {subject.upper()} {data['level']}
+    page = f"""💻 ĐỀ THI {exam_type.upper()} MÔN {subject.upper()} CẤP {data['level']}
 
-📍 {data['province']}{' - ' + data['commune'] if data.get('commune') else ''} | 🎯 {data['year']}
+📍 {data['unit']} | 🎯 {data['year']}
 
 📥 Tải PDF:
-👉 {data.get("pdf_download")}
+👉 {drive_download}
 
 📖 Xem PDF trực tuyến:
-👉 {data.get("drive_link")}
+👉 {drive_view}
 
 🌐 Trang web tổng hợp đầy đủ các đề:
 👉 {web_link}
@@ -52,10 +47,10 @@ def generate_exam_caption(data, web_link=GITHUB_PAGE_URL):
 💻 {title.upper()}
 
 📥 Tải PDF:
-👉 {data.get("drive_link")}
+👉 {drive_download}
 
 📖 Xem PDF trực tuyến:
-👉 {data.get("drive_link")}
+👉 {drive_view}
 
 🌐 Trang web tổng hợp đầy đủ các đề:
 👉 {web_link}
@@ -80,7 +75,7 @@ def generate_book_caption(data, web_link=GITHUB_PAGE_URL):
 📖 Số trang: {pages}
 
 📥 Tải PDF:
-👉 {drive_upload}
+👉 {drive_download}
 
 📖 Xem PDF trực tuyến:
 👉 {drive_view}
@@ -96,10 +91,10 @@ def generate_book_caption(data, web_link=GITHUB_PAGE_URL):
 
 📚 {title} - {author} ({pages} trang)
 
-📥 Tải bản gốc:
-👉 {drive_upload}
+📥 Tải PDF:
+👉 {drive_download}
 
-📖 Xem bản có watermark:
+📖 Xem PDF trực tuyến:
 👉 {drive_view}
 
 🌐 Trang web tổng hợp đầy đủ các sách:
